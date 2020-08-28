@@ -8,8 +8,8 @@ import (
 
 func TestDijkstra(t *testing.T) {
 	g := setUpGraph()
-	m := dijkstra(g, g.Nodes[0])
-	assert.Equal(t, weight(7), m[g.Nodes[5]].Dist)
+	m := dijkstra(g, g.nodes[0])
+	assert.Equal(t, weight(7), m[g.nodes[5]].dist)
 }
 
 func setUpGraph() graph {

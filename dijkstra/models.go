@@ -5,32 +5,32 @@ type weight float64
 // Graph
 
 type graph struct {
-	Nodes []*node
+	nodes []*node
 }
 
 func newGraph() graph {
 	return graph{
-		Nodes: make([]*node, 0),
+		nodes: make([]*node, 0),
 	}
 }
 
 func (g *graph) addNewNode(name string) *node {
 	n := newNode(name)
-	g.Nodes = append(g.Nodes, n)
+	g.nodes = append(g.nodes, n)
 	return n
 }
 
 // Node
 
 type node struct {
-	Name  string
-	Edges []edge
+	name  string
+	edges []edge
 }
 
 func newNode(name string) *node {
 	return &node{
-		Name:  name,
-		Edges: make([]edge, 0),
+		name:  name,
+		edges: make([]edge, 0),
 	}
 }
 
@@ -39,7 +39,7 @@ func (n *node) addNewEdge(dest *node, weight weight) {
 		Destination: dest,
 		Weight:      weight,
 	}
-	n.Edges = append(n.Edges, e)
+	n.edges = append(n.edges, e)
 }
 
 // Edge
@@ -54,6 +54,6 @@ type edge struct {
 type dijkstraMap map[*node]mapItem
 
 type mapItem struct {
-	Dist weight
-	Prev *node
+	dist weight
+	prev *node
 }
