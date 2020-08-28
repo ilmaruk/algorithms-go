@@ -1,6 +1,13 @@
 package dijkstra
 
+import (
+	"fmt"
+	"math"
+)
+
 type weight float64
+
+const infinite = math.MaxFloat64
 
 // Graph
 
@@ -36,8 +43,8 @@ func newNode(name string) *node {
 
 func (n *node) addNewEdge(dest *node, weight weight) {
 	e := edge{
-		Destination: dest,
-		Weight:      weight,
+		dest:   dest,
+		weight: weight,
 	}
 	n.edges = append(n.edges, e)
 }
@@ -45,13 +52,25 @@ func (n *node) addNewEdge(dest *node, weight weight) {
 // Edge
 
 type edge struct {
-	Destination *node
-	Weight      weight
+	dest   *node
+	weight weight
 }
 
 // Map
 
-type dijkstraMap map[*node]mapItem
+type dijkstraMap map[*node]*mapItem
+
+func (m dijkstraMap) String() string {
+	var s string
+	for n, i := range m {
+		prev := ""
+		if i.prev != nil {
+			prev = i.prev.name
+		}
+		s += fmt.Sprintf("%s:[%s|%.f]\n", n.name, prev, i.dist)
+	}
+	return s
+}
 
 type mapItem struct {
 	dist weight

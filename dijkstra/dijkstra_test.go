@@ -9,7 +9,8 @@ import (
 func TestDijkstra(t *testing.T) {
 	g := setUpGraph()
 	m := dijkstra(g, g.nodes[0])
-	assert.Equal(t, weight(7), m[g.nodes[5]].dist)
+	assert.Equal(t, weight(7), m[g.nodes[6]].dist)
+	assert.Equal(t, g.nodes[4], m[g.nodes[6]].prev)
 }
 
 func setUpGraph() graph {
